@@ -1,17 +1,23 @@
 name: CI
-on: [pull_request]
+
+on:
+  pull_request:
+
 jobs:
-build:
-runs-on: macos-latest
+  build:
+    runs-on: macos-latest
 
-steps:
-- uses: actions/checkout@master
-- name: Build
-run: swift build
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-- name: Test
-run: swift test
+      - name: Build Project
+        run: swift build
 
-- name: Danger
-run: danger-swift ci
-env: GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run Tests
+        run: swift test
+
+      - name: Run Danger
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: danger-swift ci
