@@ -1,0 +1,15 @@
+name: Danger
+
+on:
+  pull_request:
+
+jobs:
+  danger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Swift
+        run: sudo apt-get install swift
+      - name: Run Danger
+        run: swift run danger-swift ci
+
