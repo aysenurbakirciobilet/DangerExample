@@ -195,6 +195,9 @@
 			);
 			mainGroup = 1DC8DBE22CF0CA920040C247;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1D10609C2CF0D8CA00B3FA58 /* XCRemoteSwiftPackageReference "swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1DC8DBEC2CF0CA920040C247 /* Products */;
 			projectDirPath = "";
@@ -558,6 +561,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1D10609C2CF0D8CA00B3FA58 /* XCRemoteSwiftPackageReference "swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danger/swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.20.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 1DC8DBE32CF0CA920040C247 /* Project object */;
 }

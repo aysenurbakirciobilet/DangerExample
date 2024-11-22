@@ -3,23 +3,23 @@
 
 import PackageDescription
 
- let package = Package(
-     name: "DangerExample-Danger",
-     defaultLocalization: "en",
+let package = Package(
+    name: "DangerExample",
+    defaultLocalization: "en",
      products: [
-       .library(name: "DangerDeps", type: .dynamic, targets: ["DangerExample-Danger"])
+       .library(name: "DangerDeps", type: .dynamic, targets: ["DangerExample"])
      ],
-     dependencies: [
+    dependencies: [
          .package(url: "https://github.com/danger/swift.git", from: "3.20.2")
      ],
-     targets: [
-         .target(
-             name: "DangerExample-Danger",
+    targets: [
+        .target(
+             name: "DangerExample",
              dependencies: [
                  .product(name: "Danger", package: "swift")
              ],
-             path: ".",
+             path: "DangerExample",
              sources: ["Stringfy.swift"]
          )
-     ]
- )
+    ]
+)

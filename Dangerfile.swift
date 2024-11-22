@@ -2,27 +2,26 @@ import Danger
 import Foundation
 
 let danger = Danger()
-
-// Dosya değişikliklerini al
 let editedFiles = danger.git.modifiedFiles + danger.git.createdFiles
 
-// Büyük PR kontrolü
 if editedFiles.count - danger.git.deletedFiles.count > 300 {
-    danger.warn("Big PR: This pull request contains a large number of changes. Try to keep changes smaller if possible.")
+  warn("Big PR, try to keep changes smaller if you can")
 }
 
-// PR açıklaması kontrolü
-let body = danger.github?.pullRequest.body?.count ?? 0
-let linesOfCode = danger.github?.pullRequest.additions ?? 0
-if body < 10 && linesOfCode > 10 {
-    danger.warn("PR Description Needed: Please provide a more detailed summary of your changes.")
+// Encourage writing up some reasoning about the PR, rather than just leaving a title.
+let body = danger.github.pullRequest.body?.count ?? 0
+let linesOfCode = danger.github.pullRequest.additions ?? 0
+if body < 3 && linesOfCode > 10 {
+    warn("Please provide a summary in the Pull Request description")
 }
 
-// WIP kontrolü
-if let prTitle = danger.github?.pullRequest.title, prTitle.contains("WIP") {
-    danger.warn("Work in Progress: This PR is marked as a work in progress.")
+// Support running via `danger local`
+if danger.github != nil {
+    // These checks only happen on a PR
+    if danger.github.pullRequest.title.contains("WIP") {
+        warn("PR is classed as Work in Progress")
+    }
 }
 
-// Dosyaları yazdır (hata ayıklama için)
-//print("Modified Files: \(editedFiles)")
-//print("Deleted Files: \(danger.git.deletedFiles)")
+print("Running Swiftlint on changed files...")
+//SwiftLint.lint(.files(editedFiles), inline: true, strict: true, quiet: false)
